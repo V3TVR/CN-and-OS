@@ -1,0 +1,106 @@
+#include <stdio.h>
+void main()
+{
+int pid[10],bt[10],wt[10],tat[10],n,twt=0,ttat=0,i;
+float awt,atat;
+printf("Enter no.of processes:");
+scanf("%d",&n);
+printf("\n Enter burst times:");
+for(i=0;i<n;i++)
+scanf("%d",&bt[i]);
+wt[0]=0;
+tat[0]=bt[0];
+for(i=1;i<n;i++){
+wt[i]=tat[i-1];
+tat[i]=bt[i]+wt[i];
+}
+for(i=0;i<n;i++){
+ttat= ttat+tat[i];
+twt=twt+wt[i];
+}
+printf("\n PID \t BT \t WT \t TAT");
+for(i=0;i<n;i++)
+printf("\n %d\t%d\t%d\t%d",i+1,bt[i],wt[i],tat[i]);
+awt=(float)twt/n;
+atat=(float)ttat/n;
+printf("\nAvg. Waiting Time=%f",awt);
+printf("\nAvg. Turn around time=%f",atat);
+}
+ 
+
+
+
+
+
+
+
+
+
+Output:
+ Enter no.of processes:3
+Enter burst times:4
+13
+25
+Enter pid 1 2 3
+PID    BT   WT   TAT
+1         4        0         4
+2         13      4         17
+3         25       17       42
+Avg.waiting time=7.00000
+Avg turnaround time=21,00000
+Process returned 32(0X2) execution time=20.112s
+Pres any key to continue.
+
+
+
+week 6 CONGESTION CONTROL PROTOCOL
+
+#include <stdio.h>
+
+int main()
+{
+    int bucket_size, output_rate, input_pkt, pkt_size;
+    int storage = 0, i;
+
+    printf("Enter bucket size: ");
+    scanf("%d", &bucket_size);
+
+    printf("Enter output rate: ");
+    scanf("%d", &output_rate);
+
+    printf("Enter number of packets: ");
+    scanf("%d", &input_pkt);
+
+    for(i = 0; i < input_pkt; i++)
+    {
+        printf("Enter packet size: ");
+        scanf("%d", &pkt_size);
+
+        if(pkt_size + storage > bucket_size)
+        {
+            printf("Packet dropped (overflow)\n");
+        }
+        else
+        {
+            storage = storage + pkt_size;
+            printf("Packet stored in bucket\n");
+        }
+
+        if(storage >= output_rate)
+        {
+            printf("Transmitted packets = %d\n", output_rate);
+            storage = storage - output_rate;
+        }
+        else
+        {
+            printf("Transmitted packets = %d\n", storage);
+            storage = 0;
+        }
+       printf("Packets remaining in bucket = %d\n\n", storage);
+    }
+
+    return 0;
+}
+
+
+
