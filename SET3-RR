@@ -44,7 +44,55 @@ printf("\n The average Turn around Time=%f",atat);
 }
 
 
- 
+
+
+
+
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char data[20], key[10], temp[30], rem[10];
+    int i, j;
+
+    printf("Enter Data: ");
+    scanf("%s", data);
+
+    printf("Enter Key: ");
+    scanf("%s", key);
+
+    int data_len = strlen(data);
+    int key_len = strlen(key);
+
+    // Append zeros
+    strcpy(temp, data);
+    for(i = 0; i < key_len - 1; i++)
+        temp[data_len + i] = '0';
+    temp[data_len + key_len - 1] = '\0';
+
+    // Copy to remainder
+    strcpy(rem, temp);
+
+    // CRC division
+    for(i = 0; i < data_len; i++) {
+        if(rem[i] == '1') {
+            for(j = 0; j < key_len; j++) {
+                rem[i+j] = (rem[i+j] == key[j]) ? '0' : '1';
+            }
+        }
+    }
+
+    // Get remainder
+    for(i = 0; i < key_len - 1; i++)
+        rem[i] = rem[data_len + i];
+    rem[key_len - 1] = '\0';
+
+    // Final data
+    printf("\nRemainder: %s", rem);
+    printf("\nFinal Data: %s%s\n", data, rem);
+
+    return 0;
+} 
 
 
 
