@@ -1,0 +1,16 @@
+1) Go to codeBlocks  
+2) click on file  
+3) file -> new -> projects -> console application -> next -> select language as C -> next -> project name  
+   -> select location (folder name) -> next -> GNU GCC compiler -> finish
+
+
+
+.mkdir folder name ----to create folder
+.cd folder name----to open folder
+.touch filename.c---to create file and write code in it
+
+- compile (gcc filename.c)
+- Run (./a.out)
+cd
+cd foldername
+touch week9a.c
