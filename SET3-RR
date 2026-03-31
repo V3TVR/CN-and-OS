@@ -96,5 +96,87 @@ int main() {
 
 
 
+priority:
+
+
+#include <stdio.h>
+
+int main()
+{
+    int pid[10], bt[10], pr[10], wt[10], tat[10];
+    int i, j, n, t, twt = 0, ttat = 0;
+    float awt, atat;
+
+    printf("Enter number of processes: ");
+    scanf("%d", &n);
+
+    printf("\nEnter burst times:\n");
+    for (i = 0; i < n; i++)
+    {
+        scanf("%d", &bt[i]);
+    }
+
+    printf("\nEnter process IDs:\n");
+    for (i = 0; i < n; i++)
+    {
+        scanf("%d", &pid[i]);
+    }
+
+    printf("\nEnter priorities:\n");
+    for (i = 0; i < n; i++)
+    {
+        scanf("%d", &pr[i]);
+    }
+
+    for (i = 0; i < n; i++)
+    {
+        for (j = i + 1; j < n; j++)
+        {
+            if (pr[i] > pr[j])
+            {
+                t = pr[i];
+                pr[i] = pr[j];
+                pr[j] = t;
+
+                t = bt[i];
+                bt[i] = bt[j];
+                bt[j] = t;
+
+                t = pid[i];
+                pid[i] = pid[j];
+                pid[j] = t;
+            }
+        }
+    }
+
+    wt[0] = 0;
+    tat[0] = bt[0];
+
+    for (i = 1; i < n; i++)
+    {
+        wt[i] = tat[i - 1];
+        tat[i] = bt[i] + wt[i];
+    }
+
+    for (i = 0; i < n; i++)
+    {
+        twt += wt[i];
+        ttat += tat[i];
+    }
+
+    printf("\nPID\tPriority\tBT\tWT\tTAT\n");
+    for (i = 0; i < n; i++)
+    {
+        printf("%d\t%d\t\t%d\t%d\t%d\n", pid[i], pr[i], bt[i], wt[i], tat[i]);
+    }
+
+    awt = (float)twt / n;
+    atat = (float)ttat / n;
+
+    printf("\nAverage Waiting Time = %.2f", awt);
+    printf("\nAverage Turnaround Time = %.2f", atat);
+
+    return 0;
+}
 
  
