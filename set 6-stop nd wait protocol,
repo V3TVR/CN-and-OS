@@ -99,3 +99,49 @@ int main()
 OUTPUT
 
 child recived message : Hello from parent
+
+
+
+
+
+sliding:
+
+#include <stdio.h>
+
+int main()
+{
+    int w, i, f, frames[50];
+
+    printf("Enter window size: ");
+    scanf("%d", &w);
+
+    printf("Enter number of frames to transmit: ");
+    scanf("%d", &f);
+
+    printf("Enter %d frames:\n", f);
+    for (i = 0; i < f; i++)
+    {
+        scanf("%d", &frames[i]);
+    }
+
+    printf("\nWith sliding window protocol, the frames will be sent as:\n");
+
+    for (i = 0; i < f; i++)
+    {
+        printf("%d ", frames[i]);
+
+        if ((i + 1) % w == 0)
+        {
+            printf("\nAfter sending %d frames at each stage, sender waits for acknowledgment\n", w);
+            printf("Acknowledgment received for above frames\n");
+        }
+    }
+
+    if (f % w != 0)
+    {
+        printf("\nAcknowledgment received for remaining frames\n");
+    }
+
+    return 0;
+}
+
